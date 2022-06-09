@@ -1,4 +1,7 @@
-<template>    
+<template>
+    <router-link to='/' class="w-fit py-1 px-2 border border-primary rounded-xl">
+        <font-awesome-icon icon="fa-solid fa-house" />
+    </router-link>
     <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
                 <component :is="Component"></component>

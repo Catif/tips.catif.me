@@ -2,6 +2,7 @@ import { createRouter, createWebHistory} from 'vue-router';
 
 
 import Home from '@/views/Home.vue';
+import Category from '@/views/Category.vue';
 import Article from '@/views/Article.vue';
 
 // Admin panel
@@ -15,6 +16,9 @@ import NotFound from '@/views/NotFound.vue';
 const routes = [
     {
         path: '/', component: Home, 
+        meta: {title: 'Accueil - Catif'}
+    }, {
+        path: '/category/:name', component: Category, 
         meta: {title: 'Accueil - Catif'}
     }, {
         path: '/article/:id', component: Article, 
