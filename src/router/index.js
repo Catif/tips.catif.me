@@ -18,7 +18,7 @@ const routes = [
         path: '/', component: Home, 
         meta: {title: 'Accueil - Catif'}
     }, {
-        path: '/category/:name', component: Category, 
+        path: '/category/:name', component: Category, name: 'Category',
         meta: {title: 'Accueil - Catif'}
     }, {
         path: '/article/:id', component: Article, 
