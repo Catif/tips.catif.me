@@ -5,6 +5,7 @@
    <div v-if="tabTips.length > 0" id="Last-tips" class="w-full flex justify-center flex-wrap gap-10">
       <CardTips v-for="(Tips, index) in tabTips" :Tips="Tips" :IndexTab="index" :key="index" />
    </div>
+   <div v-else>Il n'y a pas encore d'article dans cette catégories</div>
 </div>
 </template>
 
@@ -35,22 +36,26 @@ export default {
          let requests = urls.map((url) => api.get(url));
 
          // Quand toutes les requêtes sont terminé alors :
-         Promise.all(requests).then((responses) => {
-            // Rangement des requêtes dans un tableau spécifique
-            this.tabTips = responses[0].data;
-            this.category = responses[1].data[0].name;
+         Promise.all(requests)
+            .then((responses) => {
+               // Rangement des requêtes dans un tableau spécifique
+               this.tabTips = responses[0].data;
+               this.category = responses[1].data[0].name;
 
-            // Mise en forme des dates + ajout de l'url des catégories pour chaque Tips (Possible amélioration de l'api)
-            this.tabTips.forEach((tips, tipsId) => {
-               let date = new Date(tips.created_at);
-               this.tabTips[tipsId].date =
-                  ("0" + date.getDate()).slice(-2) +
-                  "/" +
-                  ("0" + (date.getMonth() + 1)).slice(-2) +
-                  "/" +
-                  date.getFullYear();
-            });
-         });
+               // Mise en forme des dates + ajout de l'url des catégories pour chaque Tips (Possible amélioration de l'api)
+               this.tabTips.forEach((tips, tipsId) => {
+                  let date = new Date(tips.created_at);
+                  this.tabTips[tipsId].date =
+                     ("0" + date.getDate()).slice(-2) +
+                     "/" +
+                     ("0" + (date.getMonth() + 1)).slice(-2) +
+                     "/" +
+                     date.getFullYear();
+               })
+            })
+            .catch((e) => {
+               this.$router.push("/");
+            })
       },
    },
 
@@ -60,11 +65,7 @@ export default {
 
    watch: {
       "$route.params": {
-         handler(newValue) {
-            const {
-               userName
-            } = newValue;
-
+         handler() {
             this.requestApi();
          },
          immediate: true,
