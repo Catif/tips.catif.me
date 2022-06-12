@@ -2,23 +2,23 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
-  ],
-  theme: {
-    
+   content: [
+      "./index.html",
+      "./src/**/*.{vue,js,ts,jsx,tsx}",
+   ],
+   theme: {
 
-    container: {
-      center: true,
-    },
-    
-    extend: {
-      colors: {
-        'background': '#1A304D',
-        'primary': '#8FB2DF'
+
+      container: {
+         center: true,
       },
-    },
-  },
-  plugins: [],
+
+      extend: {
+         colors: {
+            'background': '#1A304D',
+            'primary': '#8FB2DF'
+         },
+      },
+   },
+   plugins: [],
 }

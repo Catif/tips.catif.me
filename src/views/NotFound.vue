@@ -1,24 +1,12 @@
 <template>
-    <div class="container">
-        <h1>Erreur 404</h1>
-    </div>
+<div class="container">
+   <h1>Erreur 404</h1>
+</div>
 </template>
 
-
-
-
-
 <script>
-
-export default {
-}
-
+export default {}
 </script>
-
-
-
-
-
 
 <style>
 
