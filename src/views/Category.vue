@@ -26,18 +26,18 @@ export default {
 
    methods: {
       requestApi() {
-         this.tabTips = [];
-         // Liste des requêtes à l'API
-         let urls = [
-            "/articles?_sort=id:desc&categories.url=" + this.$route.params.name,
-            "/categories?url=" + this.$route.params.name,
-         ];
+         if(this.$route.params.name !== undefined){
+            this.tabTips = [];
+            // Liste des requêtes à l'API
+            let urls = [
+               "/articles?_sort=id:desc&categories.url=" + this.$route.params.name,
+               "/categories?url=" + this.$route.params.name,
+            ];
 
-         let requests = urls.map((url) => api.get(url));
+            let requests = urls.map((url) => api.get(url));
 
-         // Quand toutes les requêtes sont terminé alors :
-         Promise.all(requests)
-            .then((responses) => {
+            // Quand toutes les requêtes sont terminé alors :
+            Promise.all(requests).then((responses) => {
                // Rangement des requêtes dans un tableau spécifique
                this.tabTips = responses[0].data;
                this.category = responses[1].data[0].name;
@@ -53,14 +53,8 @@ export default {
                      date.getFullYear();
                })
             })
-            .catch((e) => {
-               this.$router.push("/");
-            })
+         }
       },
-   },
-
-   mounted() {
-      this.requestApi();
    },
 
    watch: {

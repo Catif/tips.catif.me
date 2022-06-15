@@ -1,7 +1,7 @@
 <template>
-<div class="container">
-   <h1>Home Admin</h1>
-</div>
+   <div class="container">
+      <h1>Bonjour, {{ $store.state.name }}</h1>
+   </div>
 </template>
 
 <script>

@@ -17,39 +17,30 @@ export default {
    data() {
       return {
          tips: [],
-
-         opts: {
-            auto: true,
-            code: true,
-            register: null,
-            inline: false,
-            hljs: highlight,
-            ignoreIllegals: true
-         }
       }
    },
 
    methods: {
       requestApi(){
-         // Liste des requêtes à l'API
-         let urls = [
-            '/articles/' + this.$route.params.id,
-         ]
-
-         let requests = urls.map(url => api.get(url))
-
-         // Quand toutes les requêtes sont terminé alors :
-         Promise.all(requests).then((responses) => {
-            // Rangement des requêtes dans un tableau spécifique
-            this.tips = responses[0].data
-            this.tips.article = marked(this.tips.article, {
-               highlight(md) {
-                  return highlight.highlightAuto(md).value
-               }
+         if(this.$route.params.id !== undefined){
+            // Liste des requêtes à l'API
+            let urls = [
+               '/articles/' + this.$route.params.id,
+            ]
+   
+            let requests = urls.map(url => api.get(url))
+   
+            // Quand toutes les requêtes sont terminé alors :
+            Promise.all(requests).then((responses) => {
+               // Rangement des requêtes dans un tableau spécifique
+               this.tips = responses[0].data
+               this.tips.article = marked(this.tips.article, {
+                  highlight(md) {
+                     return highlight.highlightAuto(md).value
+                  }
+               })
             })
-         }).catch(e => {
-            this.$router.push('/');
-         });
+         }
       }
    },
 
@@ -66,9 +57,13 @@ export default {
 
 <style>
 pre {
-   padding: 8px 15px;
+   padding: 4px 4px 4px 10px;
    overflow-x: auto;
-   background-color: rgba(0, 0, 0, .5);
+   background-color: hsl(214, 49%, 10%);
+}
+
+code{
+   background-color: hsl(214, 49%, 10%);
 }
 
 pre code {
@@ -97,7 +92,7 @@ blockquote {
    border: 1px solid hsl(214, 56%, 50%);
 }
 pre{
-   border-radius: 1em;
+   border-radius: .5em;
 }
 blockquote{
    border-radius: .3em;
@@ -109,7 +104,7 @@ blockquote{
 
 #Article p{
    font-size: 1rem;
-   margin-top: 10px;
+   margin-top: 30px;
 }
 
 #Article h1,

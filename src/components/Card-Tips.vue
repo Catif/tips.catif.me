@@ -5,7 +5,7 @@
       <div class="flex justify-between">
          <ul class="flex flex-row flex-wrap gap-2 text-xs">
             <li class="w-fit py-1 border border-primary rounded-xl hover:border-white hover:text-white" v-for="(categoryTip, index) in Tips.categories" :key="index">
-               <router-link :to="{ name: 'Category', params: { name: categoryTip.url }}" class="py-1 px-2">{{ categoryTip.name }}</router-link>
+               <router-link :to="'/category/' + categoryTip.url " class="py-1 px-2">{{ categoryTip.name }}</router-link>
             </li>
          </ul>
          <p class="text-right text-xs pt-1 group-hover:text-white">{{ Tips.date }}</p>

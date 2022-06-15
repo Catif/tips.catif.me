@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import store from '@/store'
 
 
 import Home from '@/views/Home.vue';
@@ -19,25 +20,25 @@ const routes = [
       meta: { title: 'Accueil - Catif' }
    }, {
       path: '/category/:name', component: Category, name: 'Category',
-      meta: { title: 'Accueil - Catif' }
+      meta: { title: 'Liste des articles - Catif' }
    }, {
       path: '/article/:id', component: Article,
-      meta: { title: 'Accueil - Catif' }
+      meta: { title: 'Article - Catif' }
+   }, {
+      path: '/login', component: LoginPanel,
+      meta: { title: 'Connexion - Catif' }
    },
 
    // Admin Panel
    {
       path: '/panel', component: HomePanel,
-      meta: { title: 'Accueil - Catif' }
-   }, {
-      path: '/panel/login', component: LoginPanel,
-      meta: { title: 'Accueil - Catif' }
+      meta: { title: 'Panel - Catif' }
    }, {
       path: '/panel/create', component: CreateArticle,
-      meta: { title: 'Accueil - Catif' }
+      meta: { title: 'Création d\'un article - Catif' }
    }, {
       path: '/panel/edit/:id', component: EditArticle,
-      meta: { title: 'Accueil - Catif' }
+      meta: { title: 'Modification d\'un article - Catif' }
    },
 
 
@@ -45,19 +46,34 @@ const routes = [
    {
       path: '/:pathMatch(.*)', component: NotFound,
       meta: {
-         title: 'Error 404 - Catif'
+         title: 'Page introuvable - Catif'
       }
    }
 ];
+
+
 
 const router = createRouter({
    history: createWebHistory(),
    routes,
 })
 
-router.afterEach((to) => {
-   document.title = to.meta.title
-   window.scrollTo({ top: 0, behavior: 'smooth' })
+function isLogged() {
+   if (!store.state.token) {
+      return false;
+   } else {
+      return true;
+   }
+}
+
+router.beforeEach((to, from, next) => {
+   // si l'utilisateur veut accéder aux pages admins sans être connecté 
+   if (!isLogged() && (to.name == 'panel' || to.name == 'panelMessage' || to.name == 'panelPacks' || to.name == 'panelDescriptions')) {
+      // il est redirigé vers l'accueil
+      next({ path: '/login' })
+   } else if (isLogged() && (to.path == '/login')){
+      next({ path: '/panel'})
+   } else { next() } // sinon il est autorisé à accéder aux pages
 })
 
 export default router;
