@@ -10,6 +10,7 @@ import Article from '@/views/Article.vue';
 import HomePanel from '@/views/admin/Home.vue';
 import LoginPanel from '@/views/admin/Login.vue';
 import CreateArticle from '@/views/admin/Create.vue';
+import ListEditArticle from '@/views/admin/List-Edit.vue';
 import EditArticle from '@/views/admin/Edit.vue';
 
 import NotFound from '@/views/NotFound.vue';
@@ -36,6 +37,9 @@ const routes = [
    }, {
       path: '/panel/create', component: CreateArticle,
       meta: { title: 'Création d\'un article - Catif' }
+   }, {
+      path: '/panel/edit', component: ListEditArticle,
+      meta: { title: 'Liste des articles - Catif' }
    }, {
       path: '/panel/edit/:id', component: EditArticle,
       meta: { title: 'Modification d\'un article - Catif' }

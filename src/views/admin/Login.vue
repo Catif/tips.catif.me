@@ -1,6 +1,6 @@
 <template>
    <div class="container h-full flex flex-col justify-center">
-      <Alert :alert="alert"/>
+      <Alert v-if="alert.length != 0" :alert="alert"/>
       <h1 class="text-3xl text-center mb-5 mt-10">Accès administrateur</h1>
       <form
          id="login"
@@ -34,7 +34,11 @@
 
 <script>
 import Alert from "@/components/Alert.vue"
+
 export default {
+   components:{
+      Alert
+   },
    data() {
       return {
          identifiant: '',
@@ -52,8 +56,10 @@ export default {
                password: this.password
             }).then(res => {
                this.$store.commit('setToken', res.data.jwt)
-               this.$store.commit('setName', res.data.username)
+               this.$store.commit('setName', res.data.user.username)
+               console.log(this.$store)
 
+               this.alert = ['success', 'Vous allez être redirigé vers le panel administrateur']
                this.$router.push('/panel')
             }).catch(e => {
                this.alert = ['error', 'Identifiant ou mot de passe incorrect.']
