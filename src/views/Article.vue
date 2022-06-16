@@ -9,14 +9,12 @@
 <script>
 import highlight from 'highlight.js'
 import 'highlight.js/styles/base16/solarized-dark.css'
-import {
-   marked
-} from 'marked'
+import { marked } from 'marked'
 
 export default {
    data() {
       return {
-         tips: [],
+         tips: null,
       }
    },
 
@@ -56,6 +54,13 @@ export default {
 </script>
 
 <style>
+#Article :first-child,
+#Article h1 + *,
+#Article h2 + *,
+#Article h3 + *{
+   margin-top: 0px !important;
+}
+
 pre {
    padding: 4px 4px 4px 10px;
    overflow-x: auto;
@@ -90,6 +95,7 @@ pre code {
 pre,
 blockquote {
    border: 1px solid hsl(214, 56%, 50%);
+   margin-bottom: 5px !important;
 }
 pre{
    border-radius: .5em;
@@ -110,7 +116,6 @@ blockquote{
 #Article h1,
 #Article h2,
 #Article h3{
-   font-weight: 700;
    margin-top: 25px;
    margin-bottom: 5px;
 }

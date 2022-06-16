@@ -1,7 +1,7 @@
 <template>
    <transition name="fade" mode="out-in">
       <div class="flex flex-col gap-2 absolute">
-         <router-link  v-if="!($route.path === '/')" to="/" class="w-fit ml-3 py-1 px-2 border border-primary rounded-xl bg-background">
+         <router-link to="/" class="w-fit ml-3 py-1 px-2 border border-primary rounded-xl bg-background">
             <font-awesome-icon :icon="['fas', 'house']" />
          </router-link>
          <router-link v-if="$store.state.token !== false" to="/panel" class="w-fit ml-3 py-1 px-2 border cursor-pointer border-primary rounded-xl bg-background">
