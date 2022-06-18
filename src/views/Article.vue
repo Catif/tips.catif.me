@@ -14,7 +14,7 @@ import { marked } from 'marked'
 export default {
    data() {
       return {
-         tips: null,
+         tips: {title: 'Chargement...', article: 'Si vous voyez ce message, c\'est qu\'une erreur est survenue.'},
       }
    },
 
@@ -37,7 +37,7 @@ export default {
                      return highlight.highlightAuto(md).value
                   }
                })
-            })
+            }).catch(err => console.log(err))
          }
       }
    },

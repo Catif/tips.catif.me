@@ -11,13 +11,13 @@
    <!-- Liste des trois derniers tips -->
    <h1 class="text-3xl mb-5 mt-10">Derniers tips publiées</h1>
    <div id="Last-tips" class="w-full flex justify-center flex-wrap gap-10">
-      <CardTips v-for="(Tips, index) in tabTips" :Tips="Tips" :IndexTab="index" :key="index" />
+      <CardTips v-for="(Tips, index) in tabTips" action="showArticle" :Tips="Tips" :key="index" />
    </div>
 
    <!-- Liste des catégories du site -->
    <h1 class="text-3xl mb-5 mt-10">Liste des catégories</h1>
    <div id="Categories" class="w-full flex justify-center flex-wrap gap-10">
-      <CardCategory v-for="(Category, index) in tabCategory" :Category="Category" :IndexTab="index" :key="Category.id" />
+      <CardCategory v-for="(Category, index) in tabCategory" :Category="Category" :key="index" />
    </div>
 </div>
 </template>

@@ -101,24 +101,15 @@ export default {
             this.apiCategories[index].checked = false
             let deleteId = this.listCategories.findIndex(category => category.name === categoryTemp.name)
             this.listCategories.splice(deleteId, 1)
-            console.log(this.listCategories)
          } else {
             if(this.listCategories.length < 3){
                this.apiCategories[index].checked = true
                this.listCategories.push(this.apiCategories[index])
-               console.log(this.listCategories)
             }
          }
          
       },
-
-
-
-
-
-
       sendArticle(){
-         console.log(this.$store.state.token)
          if (confirm('Souhaites-tu bien créer l\'article ?')){
             api.post('/articles',
                {
