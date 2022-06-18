@@ -52,6 +52,10 @@ export default {
                      "/" +
                      date.getFullYear();
                })
+
+               document.title = 'Catégorie : ' + this.category + ' - Tips de Catif'
+               document.querySelector('meta[name="description"]').setAttribute('content', 'Retrouvez tous les tips liés à la catégorie ' + this.category + '.')
+               document.querySelector('meta[name="keywords"]').setAttribute('content', defaultTags + this.category)
             })
          }
       },

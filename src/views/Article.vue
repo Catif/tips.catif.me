@@ -37,7 +37,15 @@ export default {
                      return highlight.highlightAuto(md).value
                   }
                })
-            }).catch(err => console.log(err))
+               document.title = this.tips.title + 'Tips de Catif'
+               document.querySelector('meta[name="description"]').setAttribute('content', this.tips.desc)
+               document.querySelector('meta[name="keywords"]').setAttribute('content', defaultTags + this.tips.tags)
+            }).catch(err => {
+               console.log(err)
+               this.$router.push('/')
+            })
+         } else {
+            this.$router.push('/')
          }
       }
    },
@@ -57,55 +65,29 @@ export default {
 #Article :first-child,
 #Article h1 + *,
 #Article h2 + *,
-#Article h3 + *{
-   margin-top: 0px !important;
+#Article h3 + *,
+#Article hr + *{
+   margin-top: 5px !important;
 }
-
-pre {
-   padding: 4px 4px 4px 10px;
-   overflow-x: auto;
-   background-color: hsl(214, 49%, 10%);
+#Article hr{border-color: #8FB2DF}
+#Article h1,
+#Article h2,
+#Article h3{
+   margin-top: 100px;
+   margin-bottom: 5px;
+   font-weight: bold;
 }
-
-code{
-   background-color: hsl(214, 49%, 10%);
+#Article h1{
+   font-size: 1.5rem;
+   line-height: 2rem;
 }
-
-pre code {
-   display: inline-block;
-   font-size: 14px;
+#Article h2{
+   font-size: 1.25rem;
+   line-height: 1.75rem;
 }
-
-.hljs-comment {
-   font-style: italic;
-}
-
-#Article a,
-#Article a:visited {
-   text-decoration: underline;
-   color: hsl(214, 56%, 90%);
-}
-
-#Article a:hover,
-#Article a:focus,
-#Article a:active {
-   color: hsl(214, 56%, 80%);
-}
-
-pre,
-blockquote {
-   border: 1px solid hsl(214, 56%, 50%);
-   margin-bottom: 5px !important;
-}
-pre{
-   border-radius: .5em;
-}
-blockquote{
-   border-radius: .3em;
-}
-
-#Article thead {
-   display: table-header-group;
+#Article h3{
+   font-size: 1.125rem;
+   line-height: 1.75rem;
 }
 
 #Article p{
@@ -113,27 +95,43 @@ blockquote{
    margin-top: 30px;
 }
 
-#Article h1,
-#Article h2,
-#Article h3{
-   margin-top: 25px;
-   margin-bottom: 5px;
+pre {
+   padding: 4px 4px 4px 10px;
+   overflow-x: auto;
+   background-color: hsl(214, 49%, 10%);
 }
+code{
+   background-color: hsl(214, 49%, 10%);
+   padding: 1px 3px;
+}
+pre code {
+   display: inline-block;
+   font-size: 14px;
+}
+.hljs-comment {font-style: italic;}
 
-#Article h1{
-   font-size: 1.5rem;
-   line-height: 2rem;
+#Article a,
+#Article a:visited {
+   text-decoration: underline;
+   color: hsl(214, 56%, 90%);
 }
+#Article a:hover,
+#Article a:focus,
+#Article a:active {color: hsl(214, 56%, 80%);}
 
-#Article h2{
-   font-size: 1.25rem;
-   line-height: 1.75rem;
+pre,
+blockquote {
+   border: 1px solid hsl(214, 56%, 50%);
+   margin-bottom: 5px !important;
 }
+blockquote {
+   border-left: 6px solid #8FB2DF;
+   padding: 1rem;
+   border-radius: .3em;
+}
+pre{border-radius: .5em;}
 
-#Article h3{
-   font-size: 1.125rem;
-   line-height: 1.75rem;
-}
+#Article thead {display: table-header-group;}
 
 #Article img,
 #Article canvas,
@@ -142,13 +140,9 @@ blockquote{
 #Article svg,
 #Article select,
 #Article textarea {
-   max-width: 90%;
    margin: auto;
-}
-
-#Article blockquote {
-   border-left: 6px solid #8FB2DF;
-   padding: 1rem;
+   margin-top: 5px;
+   border-radius: 4px;
 }
 
 #Article ul { 
@@ -170,7 +164,4 @@ blockquote{
    margin-left: 15px; 
 }
 
-#Article hr{
-   border-color: #8FB2DF
-}
 </style>

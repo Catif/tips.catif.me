@@ -149,7 +149,7 @@ export default {
          this.nameArticle = this.Tips.title
          this.textArticle = this.Tips.article
          this.updateVisualisation()
-         this.Tips.categories.forEach((category, index) => {
+         this.Tips.categories.forEach((category) => {
             this.checkCategory(category.id)
          })
       })

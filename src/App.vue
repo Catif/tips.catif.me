@@ -29,15 +29,7 @@ export default {
          this.$store.commit('logout')
          this.$router.push('/')
       }
-   },
-   watch: {
-      $route: {
-         immediate: true,
-         handler(to, from) {
-            document.title = to.meta.title;
-         },
-      },
-   },
+   }
 };
 </script>
 

@@ -18,31 +18,31 @@ import NotFound from '@/views/NotFound.vue';
 const routes = [
    {
       path: '/', component: Home,
-      meta: { title: 'Accueil - Catif' }
+      meta: { title: 'Accueil - Tips de Catif' }
    }, {
       path: '/category/:name', component: Category, name: 'Category',
-      meta: { title: 'Liste des articles - Catif' }
+      meta: { title: 'Liste des articles - Tips de Catif' }
    }, {
-      path: '/article/:id', component: Article,
-      meta: { title: 'Article - Catif' }
+      path: '/article/:id', component: Article, name: 'Article',
+      meta: { title: 'Article - Tips de Catif' }
    }, {
       path: '/login', component: LoginPanel,
-      meta: { title: 'Connexion - Catif' }
+      meta: { title: 'Connexion - Tips de Catif' }
    },
 
    // Admin Panel
    {
       path: '/panel', component: HomePanel,
-      meta: { title: 'Panel - Catif' }
+      meta: { title: 'Panel - Tips de Catif' }
    }, {
       path: '/panel/create', component: CreateArticle,
-      meta: { title: 'Création d\'un article - Catif' }
+      meta: { title: 'Création d\'un article - Tips de Catif' }
    }, {
       path: '/panel/edit', component: ListEditArticle,
-      meta: { title: 'Liste des articles - Catif' }
+      meta: { title: 'Liste des articles - Tips de Catif' }
    }, {
       path: '/panel/edit/:id', component: EditArticle,
-      meta: { title: 'Modification d\'un article - Catif' }
+      meta: { title: 'Modification d\'un article - Tips de Catif' }
    },
 
 
@@ -78,6 +78,10 @@ router.beforeEach((to, from, next) => {
    } else if (isLogged() && (to.path == '/login')){
       next({ path: '/panel'})
    } else { next() } // sinon il est autorisé à accéder aux pages
+
+   document.title = to.meta.title
+   document.querySelector('meta[name="keywords"]').setAttribute('content', 'tutoriel, tutorial, tips, niche, catif, article, technologie, france, projet, vuejs')
+   document.querySelector('meta[name="description"]').setAttribute('content', 'Site dédié aux tutoriels informatique de niche.')
 })
 
 export default router;

@@ -30,10 +30,10 @@
       <div class="w-full">
          <h2 class="text-xl">Catégories (max 3)</h2>
          <ul class="w-full h-48 overflow-y-auto rounded bg-black/40">
-            <li v-for="(category, index) in apiCategories" :key="index">
+            <li v-for="(category) in apiCategories" :key="category.id">
                <p 
                   class="px-3 py-1" 
-                  @click="checkCategory(index)" 
+                  @click="checkCategory(category.id)" 
                   :class="{'bg-primary/20': category.checked}"
                >
                   {{ category.name}}
@@ -96,15 +96,15 @@ export default {
          }
       },
       checkCategory(index){
-         let categoryTemp = this.apiCategories[index]
-         if(categoryTemp.checked == true){
-            this.apiCategories[index].checked = false
-            let deleteId = this.listCategories.findIndex(category => category.name === categoryTemp.name)
-            this.listCategories.splice(deleteId, 1)
+         let idApi = this.apiCategories.findIndex(category => category.id === index)
+         if(this.apiCategories[idApi].checked == true){
+            this.apiCategories[idApi].checked = false
+            let idList = this.listCategories.findIndex(category => category.name === this.apiCategories[idApi].name)
+            this.listCategories.splice(idList, 1)
          } else {
             if(this.listCategories.length < 3){
-               this.apiCategories[index].checked = true
-               this.listCategories.push(this.apiCategories[index])
+               this.apiCategories[idApi].checked = true
+               this.listCategories.push(this.apiCategories[idApi])
             }
          }
          

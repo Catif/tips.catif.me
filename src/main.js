@@ -14,6 +14,7 @@ import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faHouse, faDoorOpen, faHammer, faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { faWindows } from '@fortawesome/free-brands-svg-icons'
 // import { } from '@fortawesome/free-brands-svg-icons'
 
 library.add(faHouse, faDoorOpen, faHammer, faTrashCan)
@@ -35,3 +36,5 @@ window.api = axios.create({
 window.apiBase= axios.create({
    baseURL: 'https://api.catif.me/'
 });
+
+window.defaultTags = 'tutoriel, tutorial, tips, niche, catif, article, technologie, france, projet, vuejs, '

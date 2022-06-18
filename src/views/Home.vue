@@ -9,7 +9,7 @@
    </div>
 
    <!-- Liste des trois derniers tips -->
-   <h1 class="text-3xl mb-5 mt-10">Derniers tips publiées</h1>
+   <h1 class="text-3xl mb-5 mt-10">Derniers tips publiés</h1>
    <div id="Last-tips" class="w-full flex justify-center flex-wrap gap-10">
       <CardTips v-for="(Tips, index) in tabTips" action="showArticle" :Tips="Tips" :key="index" />
    </div>
