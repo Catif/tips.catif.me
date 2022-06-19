@@ -32,16 +32,16 @@ const routes = [
 
    // Admin Panel
    {
-      path: '/panel', component: HomePanel,
+      path: '/panel', component: HomePanel, name:"HomePanel",
       meta: { title: 'Panel - Tips de Catif' }
    }, {
-      path: '/panel/create', component: CreateArticle,
+      path: '/panel/create', component: CreateArticle, name:"CreateArticle",
       meta: { title: 'Création d\'un article - Tips de Catif' }
    }, {
-      path: '/panel/edit', component: ListEditArticle,
+      path: '/panel/edit', component: ListEditArticle, name:"ListEditArticle",
       meta: { title: 'Liste des articles - Tips de Catif' }
    }, {
-      path: '/panel/edit/:id', component: EditArticle,
+      path: '/panel/edit/:id', component: EditArticle, name:"EditArticle",
       meta: { title: 'Modification d\'un article - Tips de Catif' }
    },
 
@@ -72,8 +72,8 @@ function isLogged() {
 
 router.beforeEach((to, from, next) => {
    // si l'utilisateur veut accéder aux pages admins sans être connecté 
-   if (!isLogged() && (to.name == 'panel' || to.name == 'panelMessage' || to.name == 'panelPacks' || to.name == 'panelDescriptions')) {
-      // il est redirigé vers l'accueil
+   if (!isLogged() && (to.name == 'HomePanel' || to.name == 'CreateArticle' || to.name == 'ListEditArticle' || to.name == 'EditArticle')) {
+      // il est redirigé vers la page de connexion
       next({ path: '/login' })
    } else if (isLogged() && (to.path == '/login')){
       next({ path: '/panel'})
