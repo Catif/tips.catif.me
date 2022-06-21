@@ -92,7 +92,8 @@ export default {
 
 #Article p{
    font-size: 1rem;
-   margin-top: 30px;
+   margin-top: 20px;
+   margin-left: 30px
 }
 
 pre {
@@ -123,6 +124,7 @@ pre,
 blockquote {
    border: 1px solid hsl(214, 56%, 50%);
    margin-bottom: 5px !important;
+   margin-left: 30px
 }
 blockquote {
    border-left: 6px solid #8FB2DF;
@@ -146,6 +148,7 @@ pre{border-radius: .5em;}
 }
 
 #Article ul { 
+   margin-left: 50px; 
    list-style-type: disc; 
    list-style-position: inside; 
 }
