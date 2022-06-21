@@ -21,12 +21,22 @@
 
 
    <div class="flex flex-col gap-4 w-3/5 mx-auto mt-10" v-show="showInformation">
+      <Alert v-if="alert.length != 0" :alert="alert"/>
+
       <input required
          v-model="nameArticle"
          type="text"
          placeholder="Nom de l'article" 
          class="w-full mb-2 rounded bg-black/40 py-2 px-3 placeholder:text-primary/40"
       >
+
+      <input
+         v-model="metaDescription"
+         type="text"
+         placeholder="Description de l'article" 
+         class="w-full mb-2 rounded bg-black/40 py-2 px-3 placeholder:text-primary/40"
+      >
+
       <div class="w-full">
          <h2 class="text-xl">
             Catégories (max 3) : 
@@ -44,6 +54,13 @@
             </li>
          </ul>
       </div>
+
+      <input
+         v-model="metaTags"
+         type="text"
+         placeholder="Tag de l'article (séparées par des virgules)" 
+         class="w-full mb-2 rounded bg-black/40 py-2 px-3 placeholder:text-primary/40"
+      >
          
       <button @click="nextPage(1)" class="bg-black/50 w-full py-2 px-2 rounded-xl">Revenir à l'édition</button>
       <button @click="editArticle" class="bg-primary text-black w-full py-2 px-2 rounded-xl">Modifier l'article</button>
@@ -57,9 +74,16 @@ import highlight from 'highlight.js'
 import 'highlight.js/styles/base16/solarized-dark.css'
 import { marked } from 'marked'
 
+import Alert from '@/components/Alert.vue'
+
 export default {
+   components:{
+      Alert
+   },
+
    data(){
       return {
+         alert: [],
          apiCategories: null,
          showTextBox: true,
          showInformation: false,
@@ -70,6 +94,8 @@ export default {
 
          nameArticle: '',
          listCategories: [],
+         metaTags: '',
+         metaDescription: '',
       }
    },
 
@@ -111,15 +137,26 @@ export default {
                   "title": this.nameArticle,
                   "article": this.textArticle,
                   "categories": this.listCategories,
-                  "frontPicture": null
-               },                   
+                  "frontPicture": null,
+                  "tags": this.metaTags,
+                  "desc": this.metaDescription,
+               },
                {
                   headers: {
                      Authorization: 'Bearer ' + this.$store.state.token,
                   },
                }
             ).then(response => {
-               console.log('Vous venez de créer un article !')
+               this.alert = ['success', 'L\'article à bien été modifié.']
+               setTimeout(() => {
+                  this.alert = []
+               }, 5000)
+            }).catch(err => {
+               console.log(err)
+               this.alert = ['error', 'L\'envoi de la modification à rencontré une erreur avec l\'API.']
+               setTimeout(() => {
+                  this.alert = []
+               }, 5000)
             })
          }
       },
@@ -152,6 +189,8 @@ export default {
          this.Tips.categories.forEach((category) => {
             this.checkCategory(category.id)
          })
+         this.metaTags = this.Tips.tags
+         this.metaDescription = this.Tips.desc
       })
 
 

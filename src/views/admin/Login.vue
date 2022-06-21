@@ -59,10 +59,17 @@ export default {
                this.$store.commit('setName', res.data.user.username)
                console.log(this.$store)
 
-               this.alert = ['success', 'Vous allez être redirigé vers le panel administrateur']
                this.$router.push('/panel')
+               
+               this.alert = ['success', 'Vous allez être redirigé vers le panel administrateur']
+               setTimeout(() => {
+                  this.alert = []
+               }, 5000)
             }).catch(e => {
                this.alert = ['error', 'Identifiant ou mot de passe incorrect.']
+               setTimeout(() => {
+                  this.alert = []
+               }, 5000)
             })
          }
       }
